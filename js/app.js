@@ -29,11 +29,14 @@ const resetBtnEl  = document.querySelector('#restart');
 function init() {
     resetBtnEl.classList.add("hidden")
     gameMessageEl.classList.add("hidden")
-    state.boredom = 0;
+    state.boredom =0
     state.hunger = 0;
     state.sleepiness = 0;
+    playBtnEl.removeAttribute('disabled','')
+    feedBtnEl.removeAttribute('disabled','')
+    sleepBtnEl.removeAttribute('disabled','')
     gameOver = false;
-    timer = setInterval(runGame, 200);
+    timer = setInterval(runGame, 500);
     console.log("game is initialized")
 }
 
@@ -51,9 +54,12 @@ function runGame() {
 
 function render() {
     if (gameOver) {
-        timer.clearInterval;
+        clearInterval(timer);
         resetBtnEl.classList.remove("hidden")
         gameMessageEl.classList.remove("hidden")
+        playBtnEl.setAttribute('disabled','true')
+        feedBtnEl.setAttribute('disabled','')
+        sleepBtnEl.setAttribute('disabled','')
     }
     boredomStatEl.textContent = state.boredom;
     hungerStatEl.textContent = state.hunger;
@@ -65,6 +71,7 @@ function checkGameOver(){
         gameOver = true;
         gameMessageEl.textContent = "Game Over!";
     }
+
 }
 
 function playBtnClick(){
